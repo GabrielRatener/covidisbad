@@ -1,0 +1,26 @@
+{
+  "name": "covidisbad",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node start build",
+    "dev": "node start build watch",
+    "start": "node start"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "bootstrap": "^4.4.1",
+    "coffeescript": "^2.5.1",
+    "jeremy-json": "^1.0.2",
+    "jolt.sh": "^1.0.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "recharts": "^1.8.5",
+    "rollup": "^1.20.0",
+    "rollup-plugin-coffee-script": "^2.0.0",
+    "rollup-plugin-commonjs": "^10.1.0"
+  },
+  "dependencies": {}
+}
