@@ -1,58 +1,71 @@
 
 import React from "react"
-import {e} from "../ui-tools.js"
-import * as data from "../data.js"
 
-import {LineChart, XAxis, YAxis, CartesianGrid, Line} from "recharts"
+import {TextField} from "@material-ui/core"
 
-fn = (item, index, series) =>
-  index
+import * as data from "../data"
+import {setTimeout, clear} from "../utils"
+import {e} from "../ui-tools"
+
+import Results from "./results.coffee"
 
 export default class App extends React.Component
-  constructor: () ->
+
+  constructor: ->
     super()
 
+    @timer = null
+
     @state =
-      color: '#eee'
-      countries: []
+      lock: false
+      results: []
 
-  componentDidMount: () ->
-    
-    for await dataset from data.loadCountrySeries()
+  resetSearchTimer: (term = '') ->
+    if @timer
+      clear(@timer)
 
-      @setState
-        countries: [...@state.countries, dataset]
-    0
+    @setState
+      results: []
 
-  render: () ->
+    if term.length > 0
+      @timer = setTimeout 500, () =>
+        @setState
+          lock: true
+          results: []
+
+        @search(term).then (results) =>
+          @setState
+            lock: false
+            results: results
+
+  search: (term = '') ->
+
+    countries = []
+
+    for await country from data.loadCountrySeries term
+      countries.push country
+      
+    countries
+
+  render: ->
     e '#app',
+      style:
+        width: '80%'
+        margin: 'auto'
+        marginTop: 20
       [
-        ...@state.countries.map (country) =>
-
-          e LineChart,
-            key: country.code
-            width: 500
-            height: 300
-            data: country.series.map (point, i) =>
-              name: point.date
-              value: fn point, i, country.series
-            [
-              e XAxis,
-                dataKey: 'name'
-
-              e YAxis
-
-              e CartesianGrid,
-                strokeDasharray: '5 5'
-                stroke: @state.color
-
-              e Line,
-                type: 'monotone'
-                dataKey: 'value'
-                stroke: @state.color
-            ]
+        e TextField,
+          disabled: @state.lock
+          style:
+            width: "#{100}%"
+            height: 50
+            outline: 'none'
+            fontSize: "#{16}pt"
+            border: 'none'
+          onInput: (e) =>
+            {value} = e.target
+            @resetSearchTimer(value)
+        e Results,
+          countries: @state.results
       ]
-
-
-
-
+    

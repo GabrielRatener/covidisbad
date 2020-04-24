@@ -1,4 +1,6 @@
 
+import {augmentedItem} from "./functions"
+
 export const load = (resource, json = true) => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -30,13 +32,44 @@ export const getCountrySeries = (code) => {
   return load(`countries/${code}.json`);
 }
 
-export const loadCountrySeries = async function*() {
+export const loadCountrySeries = async function*(startingWith = '') {
   const countries = await getCountries();
 
   for (const code in countries) {
     const {flag, title} = countries[code];
-    const series = await getCountrySeries(code);
+    const basicSeries = await getCountrySeries(code);
 
-    yield {code, flag, title, series};
+    if (title.toLowerCase().startsWith(startingWith)) {
+      const series = [];
+      let i = 0;
+
+      for (const item of basicSeries) {
+        series.push(augmentedItem(item, i, series));
+        i++;
+      }
+
+      yield {
+        code,
+        flag,
+        title,
+        series
+      }
+    }
   }
+}
+
+export const chunk = (array, n = 3) => {
+  const chunked = [];
+
+  for (let i = 0; i < array.length; i += n) {
+    
+    const slice = array.slice(i, i + n);
+
+    if (slice.length > 0) {
+      
+      chunked.push(slice);
+    }
+  }
+    
+  return chunked;
 }

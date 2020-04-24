@@ -60,8 +60,10 @@ const copy = (production = false) => {
 
   $`cp node_modules/react/umd/react.${ns}.js public/dist/react.js`;
   $`cp node_modules/react-dom/umd/react-dom.${ns}.js public/dist/react-dom.js`;
+  $`cp node_modules/react-is/umd/react-is.${ns}.js public/dist/react-is.js`;
   $`cp node_modules/prop-types/prop-types.${ext} public/dist/prop-types.js`;
   $`cp node_modules/recharts/umd/Recharts.${ext} public/dist/recharts.js`;
+  $`cp node_modules/bootstrap/dist/css/bootstrap.min.css public/dist/bootstrap.css`;
 
   console.log('Done copying!');
 }

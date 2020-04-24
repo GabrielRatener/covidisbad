@@ -111,7 +111,8 @@ const el = (target, id, attributes, children) => {
     ...(id === null ? {} : {id})
   }
 
-  return React.createElement(target, newAttributes, children);
+  return React.createElement(target, newAttributes,
+    children.length === 0 ? null : children);
 }
 
 export const c = (component, shorthand = '', attributes = {}, children = []) => {
@@ -162,3 +163,5 @@ export const e = (lead, ...args) => {
     return c(lead, ...args);
   }
 }
+
+export const tn = (text) => text;
