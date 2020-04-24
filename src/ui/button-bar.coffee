@@ -1,10 +1,15 @@
 
 import React from "react"
 
-import {Button} from "@material-ui/core"
+import {Chip} from "@material-ui/core"
 
 import {e, tn} from "../ui-tools"
 import {functions} from "../functions"
+
+functionNames =
+  Object.entries(functions)
+    .filter(([name, {title}]) => !!title)
+    .map ([name, {title}]) => {name, title}
 
 export default class ButtonBar extends React.Component
 
@@ -24,15 +29,14 @@ export default class ButtonBar extends React.Component
 
   render: ->
 
-    functionNames =
-      Object.entries(functions)
-        .filter(([name, {title}]) => !!title)
-        .map ([name, {title}]) => {name, title}
+    style =
+      textAlign: 'left'
 
-    e 'div', [
+    e 'div', {style}, [
       ...functionNames.map ({name, title}) =>
-        e Button,
+        e Chip,
           key: name
+          label: title
           variant: 'outlined'
           disabled: @state.selected == name
           style:
@@ -42,9 +46,6 @@ export default class ButtonBar extends React.Component
           onClick: () =>
 
             @select(name)
-          [
-            tn title
-          ]
     ]
 
 

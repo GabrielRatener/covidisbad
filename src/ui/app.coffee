@@ -122,15 +122,21 @@ export default class App extends React.Component
         ]
 
         ...@state.results.map (country, index) =>
-          e Grid, {item: yes, xs: 6, key: country.code, style}, [
-            e Chart,
-              width: 420,
-              height: 250
-              fn: @state.func
-              country: country
-              # onClick: () =>
-              #   @viewInModal(index)
-          ]
+          e Grid,
+            item: yes
+            xs: 6
+            key: country.code
+            style:
+              textAlign: 'left'
+            [
+              e Chart,
+                width: 420,
+                height: 250
+                fn: @state.func
+                country: country
+                onClick: () =>
+                  @viewInModal(index)
+            ]
       ]
 
       if @isModalOpen()

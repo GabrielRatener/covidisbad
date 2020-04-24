@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node start build",
     "dev": "node start build watch",
-    "start": "node start"
+    "start": "node start",
+    "postinstall": "npm start postinstall"
   },
   "devDependencies": {
     "@material-ui/core": "^4.9.11",

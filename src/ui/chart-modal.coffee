@@ -21,18 +21,37 @@ export default class ChartModal extends React.Component
 
   render: () ->
 
-    {country, children, ...props} = @props
+    {country, ...props} = @props
 
-    e Modal, {open: yes}, [
+    style =
+      maxWidth: "#{80}%"
+      display: 'flex'
+      flexDirection: 'column'
+      justifyContent: 'center'
+      margin: 'auto'
 
-      e Paper, [
-        e 'h2', ["Data for #{country.title}"]
-        e ButtonBar,
-          onSelect: (selected) =>
-            @select selected
-            0
+    attributes =
+      disablePortal: yes
+      disableEnforceFocus: yes
+      disableAutoFocus: yes
 
-        e Chart, {country, fn: @state.selected}
-      ]
+    e Modal, {open: yes, style, ...attributes, ...props}, [
+
+      e Paper,
+        style:
+          padding: "#{10}px"
+        [
+          e 'h2', ["Data for #{country.title}"]
+          e ButtonBar,
+            onSelect: (selected) =>
+              @select selected
+              0
+
+          e Chart,
+            width: 700
+            height: 350
+            country: country
+            fn: @state.selected
+        ]
     ]
 

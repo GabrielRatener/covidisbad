@@ -111,8 +111,6 @@ const el = (target, id, attributes, children) => {
     ...(id === null ? {} : {id})
   }
 
-  console.log({target, newAttributes, children});
-
   const correctChildren =
     (children.length === 0) ?
       null :

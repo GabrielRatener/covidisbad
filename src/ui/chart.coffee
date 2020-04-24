@@ -22,6 +22,7 @@ export default class Chart extends React.Component
 
     style = {
       padding: 5
+      cursor: 'pointer'
     }
 
     events =
@@ -34,9 +35,11 @@ export default class Chart extends React.Component
       e 'h3',
         style:
           textAlign: 'center'
-        [tn @props.country.title]
+        ["#{@props.country.title}"]
 
       e LineChart,
+        style:
+          margin: 'auto'
         key: @props.country.code
         width: @props.width or 270
         height: @props.height or 200

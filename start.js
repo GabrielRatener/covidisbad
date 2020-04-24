@@ -68,6 +68,11 @@ const copy = (production = false) => {
   console.log('Done copying!');
 }
 
+const postinstall = () => {
+  copy();
+  rollup();
+}
+
 const rollup = (watch = false) => {
 
   if (watch) {
@@ -95,8 +100,11 @@ const main = async (script, args = []) => {
     
     // same for now...
     case 'copy':
-    case 'postinstall':
       copy();
+      return;
+
+    case 'postinstall':
+      postinstall();
       return;
 
     default:
