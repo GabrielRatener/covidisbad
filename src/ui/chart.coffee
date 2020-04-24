@@ -12,13 +12,24 @@ import {
 
 import {Paper} from "@material-ui/core"
 
+import {round} from "../utils"
 import {e, tn} from "../ui-tools.js"
 import {functions} from '../functions.js'
 
 export default class Chart extends React.Component
 
   render: ->
-    e Paper, [
+
+    style = {
+      padding: 5
+    }
+
+    events =
+      onClick: () =>
+        if @props.onClick?
+          @props.onClick(@props.country)
+
+    e Paper, {square: yes, elevation: 5, style, ...@props}, [
 
       e 'h3',
         style:
@@ -27,26 +38,22 @@ export default class Chart extends React.Component
 
       e LineChart,
         key: @props.country.code
-        width: 270
-        height: 200
+        width: @props.width or 270
+        height: @props.height or 200
         data: @props.country.series.map (point, i, points) =>
+          [_, y, m, d] = /^(\d+)-(\d+)-(\d+)$/.exec point.date
 
-          name: point.date
-          value: point[@props.fn]
+          name: "#{m}/#{d}"
+          value: round 2, point[@props.fn]
         [
-          e XAxis,
-            dataKey: 'name'
-
+          e XAxis, {dataKey: 'name'}
           e YAxis
-
-          e CartesianGrid,
-            strokeDasharray: '10 5'
-            stroke: "#faf"
-
+          e CartesianGrid, {strokeDasharray: '10 5', stroke: '#faf'}
           e Line,
             type: 'monotone'
             dataKey: 'value'
-            stroke: "#000"
+            stroke: '#00f'
+            name: functions[@props.fn].title
 
           e Tooltip
         ]

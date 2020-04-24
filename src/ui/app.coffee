@@ -1,13 +1,22 @@
 
 import React from "react"
 
-import {TextField} from "@material-ui/core"
+import {
+  Paper
+  CircularProgress
+  Icon
+  TextField
+  InputAdornment
+  Grid
+} from "@material-ui/core"
 
 import * as data from "../data"
 import {setTimeout, clear} from "../utils"
 import {e} from "../ui-tools"
 
-import Results from "./results.coffee"
+import Chart from "./chart.coffee"
+import ButtonBar from "./button-bar.coffee"
+import ChartModal from "./chart-modal.coffee"
 
 export default class App extends React.Component
 
@@ -19,6 +28,22 @@ export default class App extends React.Component
     @state =
       lock: false
       results: []
+      func: 'cumulative'
+      country: null # selected country in modal
+
+  isModalOpen: ->
+    @state.country != null
+
+  closeModal: ->
+    @setState
+      country: null
+    0
+
+  viewInModal: (index) ->
+    @setState
+      modal: yes
+      country: @state.results[index]
+    0
 
   resetSearchTimer: (term = '') ->
     if @timer
@@ -47,25 +72,72 @@ export default class App extends React.Component
       
     countries
 
+  selectFunction: (func) ->
+    @setState {func}
+    0
+
   render: ->
-    e '#app',
-      style:
-        width: '80%'
-        margin: 'auto'
-        marginTop: 20
-      [
-        e TextField,
-          disabled: @state.lock
+
+    style =
+      width: '80%'
+      margin: 'auto'
+      marginTop: 20
+      padding: 10
+
+    e Paper, '#app', {square: yes, elevation: 2, style}, [
+      e 'h1',
+        style:
+          textAlign: 'center'
+        ["Covid Blows!"]
+
+      e 'hr'
+
+      e TextField,
+        placeholder: 'Search countries'
+        disabled: @state.lock
+        inputProps:
           style:
-            width: "#{100}%"
-            height: 50
-            outline: 'none'
-            fontSize: "#{16}pt"
-            border: 'none'
-          onInput: (e) =>
-            {value} = e.target
-            @resetSearchTimer(value)
-        e Results,
-          countries: @state.results
+            fontSize: "#{32}pt"
+        InputProps:
+          endAdornment:
+            e InputAdornment, {position: 'end'}, [
+              if @state.lock
+                e CircularProgress, {color: 'primary', margin: 5}
+              else
+                e Icon, {fontSize: 'large'}, ['search']
+            ]
+        style:
+          width: "#{100}%"
+        onInput: (e) =>
+          {value} = e.target
+          @resetSearchTimer(value)
+
+      e Grid, {container: yes, spacing: 3}, [
+        e Grid, {item: yes, lg: 12}, [
+          e ButtonBar,
+            onSelect: (selected) =>
+
+              @selectFunction(selected)
+              0
+        ]
+
+        ...@state.results.map (country, index) =>
+          e Grid, {item: yes, xs: 6, key: country.code, style}, [
+            e Chart,
+              width: 420,
+              height: 250
+              fn: @state.func
+              country: country
+              # onClick: () =>
+              #   @viewInModal(index)
+          ]
       ]
+
+      if @isModalOpen()
+        e ChartModal,
+          country: @state.country,
+          open: yes
+          onClose: () =>
+            @closeModal()
+    ]
     

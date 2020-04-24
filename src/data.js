@@ -34,12 +34,13 @@ export const getCountrySeries = (code) => {
 
 export const loadCountrySeries = async function*(startingWith = '') {
   const countries = await getCountries();
+  const startingWithLower = startingWith.toLocaleLowerCase()
 
   for (const code in countries) {
     const {flag, title} = countries[code];
     const basicSeries = await getCountrySeries(code);
 
-    if (title.toLowerCase().startsWith(startingWith)) {
+    if (title.toLowerCase().startsWith(startingWithLower)) {
       const series = [];
       let i = 0;
 

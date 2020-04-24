@@ -1,7 +1,6 @@
 /node_modules/
 /public/build/
 /public/countries/
-
 /public/dist/
 
 .DS_Store

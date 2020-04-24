@@ -111,8 +111,17 @@ const el = (target, id, attributes, children) => {
     ...(id === null ? {} : {id})
   }
 
-  return React.createElement(target, newAttributes,
-    children.length === 0 ? null : children);
+  console.log({target, newAttributes, children});
+
+  const correctChildren =
+    (children.length === 0) ?
+      null :
+    (children.length === 1) ?
+      children[0] :
+
+      children;
+
+  return React.createElement(target, newAttributes, correctChildren);
 }
 
 export const c = (component, shorthand = '', attributes = {}, children = []) => {

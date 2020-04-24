@@ -116,8 +116,17 @@
       ...(id === null ? {} : {id})
     };
 
-    return React__default.createElement(target, newAttributes,
-      children.length === 0 ? null : children);
+    console.log({target, newAttributes, children});
+
+    const correctChildren =
+      (children.length === 0) ?
+        null :
+      (children.length === 1) ?
+        children[0] :
+
+        children;
+
+    return React__default.createElement(target, newAttributes, correctChildren);
   };
 
   const c = (component, shorthand = '', attributes = {}, children = []) => {
@@ -8755,6 +8764,252 @@
   var styles$5 = function styles(theme) {
     return {
       /* Styles applied to the root element. */
+      root: {
+        margin: 0
+      },
+
+      /* Styles applied to the root element if `variant="body2"`. */
+      body2: theme.typography.body2,
+
+      /* Styles applied to the root element if `variant="body1"`. */
+      body1: theme.typography.body1,
+
+      /* Styles applied to the root element if `variant="caption"`. */
+      caption: theme.typography.caption,
+
+      /* Styles applied to the root element if `variant="button"`. */
+      button: theme.typography.button,
+
+      /* Styles applied to the root element if `variant="h1"`. */
+      h1: theme.typography.h1,
+
+      /* Styles applied to the root element if `variant="h2"`. */
+      h2: theme.typography.h2,
+
+      /* Styles applied to the root element if `variant="h3"`. */
+      h3: theme.typography.h3,
+
+      /* Styles applied to the root element if `variant="h4"`. */
+      h4: theme.typography.h4,
+
+      /* Styles applied to the root element if `variant="h5"`. */
+      h5: theme.typography.h5,
+
+      /* Styles applied to the root element if `variant="h6"`. */
+      h6: theme.typography.h6,
+
+      /* Styles applied to the root element if `variant="subtitle1"`. */
+      subtitle1: theme.typography.subtitle1,
+
+      /* Styles applied to the root element if `variant="subtitle2"`. */
+      subtitle2: theme.typography.subtitle2,
+
+      /* Styles applied to the root element if `variant="overline"`. */
+      overline: theme.typography.overline,
+
+      /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */
+      srOnly: {
+        position: 'absolute',
+        height: 1,
+        width: 1,
+        overflow: 'hidden'
+      },
+
+      /* Styles applied to the root element if `align="left"`. */
+      alignLeft: {
+        textAlign: 'left'
+      },
+
+      /* Styles applied to the root element if `align="center"`. */
+      alignCenter: {
+        textAlign: 'center'
+      },
+
+      /* Styles applied to the root element if `align="right"`. */
+      alignRight: {
+        textAlign: 'right'
+      },
+
+      /* Styles applied to the root element if `align="justify"`. */
+      alignJustify: {
+        textAlign: 'justify'
+      },
+
+      /* Styles applied to the root element if `nowrap={true}`. */
+      noWrap: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      },
+
+      /* Styles applied to the root element if `gutterBottom={true}`. */
+      gutterBottom: {
+        marginBottom: '0.35em'
+      },
+
+      /* Styles applied to the root element if `paragraph={true}`. */
+      paragraph: {
+        marginBottom: 16
+      },
+
+      /* Styles applied to the root element if `color="inherit"`. */
+      colorInherit: {
+        color: 'inherit'
+      },
+
+      /* Styles applied to the root element if `color="primary"`. */
+      colorPrimary: {
+        color: theme.palette.primary.main
+      },
+
+      /* Styles applied to the root element if `color="secondary"`. */
+      colorSecondary: {
+        color: theme.palette.secondary.main
+      },
+
+      /* Styles applied to the root element if `color="textPrimary"`. */
+      colorTextPrimary: {
+        color: theme.palette.text.primary
+      },
+
+      /* Styles applied to the root element if `color="textSecondary"`. */
+      colorTextSecondary: {
+        color: theme.palette.text.secondary
+      },
+
+      /* Styles applied to the root element if `color="error"`. */
+      colorError: {
+        color: theme.palette.error.main
+      },
+
+      /* Styles applied to the root element if `display="inline"`. */
+      displayInline: {
+        display: 'inline'
+      },
+
+      /* Styles applied to the root element if `display="block"`. */
+      displayBlock: {
+        display: 'block'
+      }
+    };
+  };
+  var defaultVariantMapping = {
+    h1: 'h1',
+    h2: 'h2',
+    h3: 'h3',
+    h4: 'h4',
+    h5: 'h5',
+    h6: 'h6',
+    subtitle1: 'h6',
+    subtitle2: 'h6',
+    body1: 'p',
+    body2: 'p'
+  };
+  var Typography = React.forwardRef(function Typography(props, ref) {
+    var _props$align = props.align,
+        align = _props$align === void 0 ? 'inherit' : _props$align,
+        classes = props.classes,
+        className = props.className,
+        _props$color = props.color,
+        color = _props$color === void 0 ? 'initial' : _props$color,
+        component = props.component,
+        _props$display = props.display,
+        display = _props$display === void 0 ? 'initial' : _props$display,
+        _props$gutterBottom = props.gutterBottom,
+        gutterBottom = _props$gutterBottom === void 0 ? false : _props$gutterBottom,
+        _props$noWrap = props.noWrap,
+        noWrap = _props$noWrap === void 0 ? false : _props$noWrap,
+        _props$paragraph = props.paragraph,
+        paragraph = _props$paragraph === void 0 ? false : _props$paragraph,
+        _props$variant = props.variant,
+        variant = _props$variant === void 0 ? 'body1' : _props$variant,
+        _props$variantMapping = props.variantMapping,
+        variantMapping = _props$variantMapping === void 0 ? defaultVariantMapping : _props$variantMapping,
+        other = _objectWithoutProperties(props, ["align", "classes", "className", "color", "component", "display", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"]);
+
+    var Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
+    return /*#__PURE__*/React.createElement(Component, _extends({
+      className: clsx(classes.root, className, variant !== 'inherit' && classes[variant], color !== 'initial' && classes["color".concat(capitalize(color))], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== 'inherit' && classes["align".concat(capitalize(align))], display !== 'initial' && classes["display".concat(capitalize(display))]),
+      ref: ref
+    }, other));
+  });
+   Typography.propTypes = {
+    /**
+     * Set the text-align on the component.
+     */
+    align: PropTypes__default.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
+
+    /**
+     * The content of the component.
+     */
+    children: PropTypes__default.node,
+
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: PropTypes__default.object.isRequired,
+
+    /**
+     * @ignore
+     */
+    className: PropTypes__default.string,
+
+    /**
+     * The color of the component. It supports those theme colors that make sense for this component.
+     */
+    color: PropTypes__default.oneOf(['initial', 'inherit', 'primary', 'secondary', 'textPrimary', 'textSecondary', 'error']),
+
+    /**
+     * The component used for the root node.
+     * Either a string to use a DOM element or a component.
+     * Overrides the behavior of the `variantMapping` prop.
+     */
+    component: PropTypes__default.elementType,
+
+    /**
+     * Controls the display type
+     */
+    display: PropTypes__default.oneOf(['initial', 'block', 'inline']),
+
+    /**
+     * If `true`, the text will have a bottom margin.
+     */
+    gutterBottom: PropTypes__default.bool,
+
+    /**
+     * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+     *
+     * Note that text overflow can only happen with block or inline-block level elements
+     * (the element needs to have a width in order to overflow).
+     */
+    noWrap: PropTypes__default.bool,
+
+    /**
+     * If `true`, the text will have a bottom margin.
+     */
+    paragraph: PropTypes__default.bool,
+
+    /**
+     * Applies the theme typography styles.
+     */
+    variant: PropTypes__default.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'button', 'overline', 'srOnly', 'inherit']),
+
+    /**
+     * The component maps the variant prop to a range of different DOM element types.
+     * For instance, subtitle1 to `<h6>`.
+     * If you wish to change that mapping, you can provide your own.
+     * Alternatively, you can use the `component` prop.
+     */
+    variantMapping: PropTypes__default.object
+  } ;
+  var Typography$1 = withStyles$1(styles$5, {
+    name: 'MuiTypography'
+  })(Typography);
+
+  var styles$6 = function styles(theme) {
+    return {
+      /* Styles applied to the root element. */
       root: _extends({}, theme.typography.button, {
         boxSizing: 'border-box',
         minWidth: 64,
@@ -9171,7 +9426,7 @@
      */
     variant: PropTypes__default.oneOf(['text', 'outlined', 'contained'])
   } ;
-  var Button$1 = withStyles$1(styles$5, {
+  var Button$1 = withStyles$1(styles$6, {
     name: 'MuiButton'
   })(Button);
 
@@ -9192,6 +9447,241 @@
   function useFormControl$1() {
     return React.useContext(FormControlContext);
   }
+
+  var SIZE = 44;
+
+  function getRelativeValue(value, min, max) {
+    return (Math.min(Math.max(min, value), max) - min) / (max - min);
+  }
+
+  function easeOut(t) {
+    t = getRelativeValue(t, 0, 1); // https://gist.github.com/gre/1650294
+
+    t = (t -= 1) * t * t + 1;
+    return t;
+  }
+
+  function easeIn(t) {
+    return t * t;
+  }
+
+  var styles$7 = function styles(theme) {
+    return {
+      /* Styles applied to the root element. */
+      root: {
+        display: 'inline-block'
+      },
+
+      /* Styles applied to the root element if `variant="static"`. */
+      static: {
+        transition: theme.transitions.create('transform')
+      },
+
+      /* Styles applied to the root element if `variant="indeterminate"`. */
+      indeterminate: {
+        animation: '$circular-rotate 1.4s linear infinite'
+      },
+
+      /* Styles applied to the root element if `color="primary"`. */
+      colorPrimary: {
+        color: theme.palette.primary.main
+      },
+
+      /* Styles applied to the root element if `color="secondary"`. */
+      colorSecondary: {
+        color: theme.palette.secondary.main
+      },
+
+      /* Styles applied to the `svg` element. */
+      svg: {
+        display: 'block' // Keeps the progress centered
+
+      },
+
+      /* Styles applied to the `circle` svg path. */
+      circle: {
+        stroke: 'currentColor' // Use butt to follow the specification, by chance, it's already the default CSS value.
+        // strokeLinecap: 'butt',
+
+      },
+
+      /* Styles applied to the `circle` svg path if `variant="static"`. */
+      circleStatic: {
+        transition: theme.transitions.create('stroke-dashoffset')
+      },
+
+      /* Styles applied to the `circle` svg path if `variant="indeterminate"`. */
+      circleIndeterminate: {
+        animation: '$circular-dash 1.4s ease-in-out infinite',
+        // Some default value that looks fine waiting for the animation to kicks in.
+        strokeDasharray: '80px, 200px',
+        strokeDashoffset: '0px' // Add the unit to fix a Edge 16 and below bug.
+
+      },
+      '@keyframes circular-rotate': {
+        '100%': {
+          transform: 'rotate(360deg)'
+        }
+      },
+      '@keyframes circular-dash': {
+        '0%': {
+          strokeDasharray: '1px, 200px',
+          strokeDashoffset: '0px'
+        },
+        '50%': {
+          strokeDasharray: '100px, 200px',
+          strokeDashoffset: '-15px'
+        },
+        '100%': {
+          strokeDasharray: '100px, 200px',
+          strokeDashoffset: '-125px'
+        }
+      },
+
+      /* Styles applied to the `circle` svg path if `disableShrink={true}`. */
+      circleDisableShrink: {
+        animation: 'none'
+      }
+    };
+  };
+  /**
+   * ## ARIA
+   *
+   * If the progress bar is describing the loading progress of a particular region of a page,
+   * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
+   * attribute to `true` on that region until it has finished loading.
+   */
+
+  var CircularProgress = React.forwardRef(function CircularProgress(props, ref) {
+    var classes = props.classes,
+        className = props.className,
+        _props$color = props.color,
+        color = _props$color === void 0 ? 'primary' : _props$color,
+        _props$disableShrink = props.disableShrink,
+        disableShrink = _props$disableShrink === void 0 ? false : _props$disableShrink,
+        _props$size = props.size,
+        size = _props$size === void 0 ? 40 : _props$size,
+        style = props.style,
+        _props$thickness = props.thickness,
+        thickness = _props$thickness === void 0 ? 3.6 : _props$thickness,
+        _props$value = props.value,
+        value = _props$value === void 0 ? 0 : _props$value,
+        _props$variant = props.variant,
+        variant = _props$variant === void 0 ? 'indeterminate' : _props$variant,
+        other = _objectWithoutProperties(props, ["classes", "className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"]);
+
+    var circleStyle = {};
+    var rootStyle = {};
+    var rootProps = {};
+
+    if (variant === 'determinate' || variant === 'static') {
+      var circumference = 2 * Math.PI * ((SIZE - thickness) / 2);
+      circleStyle.strokeDasharray = circumference.toFixed(3);
+      rootProps['aria-valuenow'] = Math.round(value);
+
+      if (variant === 'static') {
+        circleStyle.strokeDashoffset = "".concat(((100 - value) / 100 * circumference).toFixed(3), "px");
+        rootStyle.transform = 'rotate(-90deg)';
+      } else {
+        circleStyle.strokeDashoffset = "".concat((easeIn((100 - value) / 100) * circumference).toFixed(3), "px");
+        rootStyle.transform = "rotate(".concat((easeOut(value / 70) * 270).toFixed(3), "deg)");
+      }
+    }
+
+    return /*#__PURE__*/React.createElement("div", _extends({
+      className: clsx(classes.root, className, color !== 'inherit' && classes["color".concat(capitalize(color))], {
+        'indeterminate': classes.indeterminate,
+        'static': classes.static
+      }[variant]),
+      style: _extends({
+        width: size,
+        height: size
+      }, rootStyle, {}, style),
+      ref: ref,
+      role: "progressbar"
+    }, rootProps, other), /*#__PURE__*/React.createElement("svg", {
+      className: classes.svg,
+      viewBox: "".concat(SIZE / 2, " ").concat(SIZE / 2, " ").concat(SIZE, " ").concat(SIZE)
+    }, /*#__PURE__*/React.createElement("circle", {
+      className: clsx(classes.circle, disableShrink && classes.circleDisableShrink, {
+        'indeterminate': classes.circleIndeterminate,
+        'static': classes.circleStatic
+      }[variant]),
+      style: circleStyle,
+      cx: SIZE,
+      cy: SIZE,
+      r: (SIZE - thickness) / 2,
+      fill: "none",
+      strokeWidth: thickness
+    })));
+  });
+   CircularProgress.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: PropTypes__default.object,
+
+    /**
+     * @ignore
+     */
+    className: PropTypes__default.string,
+
+    /**
+     * The color of the component. It supports those theme colors that make sense for this component.
+     */
+    color: PropTypes__default.oneOf(['inherit', 'primary', 'secondary']),
+
+    /**
+     * If `true`, the shrink animation is disabled.
+     * This only works if variant is `indeterminate`.
+     */
+    disableShrink: chainPropTypes(PropTypes__default.bool, function (props) {
+      if (props.disableShrink && props.variant && props.variant !== 'indeterminate') {
+        return new Error('Material-UI: you have provided the `disableShrink` prop ' + 'with a variant other than `indeterminate`. This will have no effect.');
+      }
+
+      return null;
+    }),
+
+    /**
+     * The size of the circle.
+     * If using a number, the pixel unit is assumed.
+     * If using a string, you need to provide the CSS unit, e.g '3rem'.
+     */
+    size: PropTypes__default.oneOfType([PropTypes__default.number, PropTypes__default.string]),
+
+    /**
+     * @ignore
+     */
+    style: PropTypes__default.object,
+
+    /**
+     * The thickness of the circle.
+     */
+    thickness: PropTypes__default.number,
+
+    /**
+     * The value of the progress indicator for the determinate and static variants.
+     * Value between 0 and 100.
+     */
+    value: PropTypes__default.number,
+
+    /**
+     * The variant to use.
+     * Use indeterminate when there is no progress value.
+     */
+    variant: PropTypes__default.oneOf(['determinate', 'indeterminate', 'static'])
+  } ;
+  var CircularProgress$1 = withStyles$1(styles$7, {
+    name: 'MuiCircularProgress',
+    flip: false
+  })(CircularProgress);
 
   function getContainer(container) {
     container = typeof container === 'function' ? container() : container; // #StrictMode ready
@@ -9761,7 +10251,7 @@
     open: PropTypes__default.bool.isRequired
   } ;
 
-  var styles$6 = {
+  var styles$8 = {
     /* Styles applied to the root element. */
     root: {
       zIndex: -1,
@@ -9793,7 +10283,7 @@
       "aria-hidden": true,
       ref: ref
     }, other, {
-      style: _extends({}, styles$6.root, {}, invisible ? styles$6.invisible : {}, {}, other.style)
+      style: _extends({}, styles$8.root, {}, invisible ? styles$8.invisible : {}, {}, other.style)
     })) : null;
   });
    SimpleBackdrop.propTypes = {
@@ -9821,7 +10311,7 @@
 
 
   var defaultManager = new ModalManager();
-  var styles$7 = function styles(theme) {
+  var styles$9 = function styles(theme) {
     return {
       /* Styles applied to the root element. */
       root: {
@@ -10020,7 +10510,7 @@
       }
     };
 
-    var inlineStyle = styles$7(theme || {
+    var inlineStyle = styles$9(theme || {
       zIndex: zIndex
     });
     var childProps = {};
@@ -10202,7 +10692,7 @@
   }
 
   var useEnhancedEffect$3 = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
-  var styles$8 = {
+  var styles$a = {
     /* Styles applied to the shadow textarea element. */
     shadow: {
       // Visibility needed to hide the extra text area on iPads
@@ -10347,7 +10837,7 @@
       readOnly: true,
       ref: shadowRef,
       tabIndex: -1,
-      style: _extends({}, styles$8.shadow, {}, style)
+      style: _extends({}, styles$a.shadow, {}, style)
     }));
   });
    TextareaAutosize.propTypes = {
@@ -10429,7 +10919,7 @@
     return obj.startAdornment;
   }
 
-  var styles$9 = function styles(theme) {
+  var styles$b = function styles(theme) {
     var light = theme.palette.type === 'light';
     var placeholder = {
       color: 'currentColor',
@@ -11064,11 +11554,11 @@
      */
     value: PropTypes__default.any
   } ;
-  var InputBase$1 = withStyles$1(styles$9, {
+  var InputBase$1 = withStyles$1(styles$b, {
     name: 'MuiInputBase'
   })(InputBase);
 
-  var styles$a = function styles(theme) {
+  var styles$c = function styles(theme) {
     var light = theme.palette.type === 'light';
     var bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
     var backgroundColor = light ? 'rgba(0, 0, 0, 0.09)' : 'rgba(255, 255, 255, 0.09)';
@@ -11399,11 +11889,11 @@
     value: PropTypes__default.any
   } ;
   FilledInput.muiName = 'Input';
-  var FilledInput$1 = withStyles$1(styles$a, {
+  var FilledInput$1 = withStyles$1(styles$c, {
     name: 'MuiFilledInput'
   })(FilledInput);
 
-  var styles$b = {
+  var styles$d = {
     /* Styles applied to the root element. */
     root: {
       display: 'inline-flex',
@@ -11670,11 +12160,11 @@
      */
     variant: PropTypes__default.oneOf(['standard', 'outlined', 'filled'])
   } ;
-  var FormControl$1 = withStyles$1(styles$b, {
+  var FormControl$1 = withStyles$1(styles$d, {
     name: 'MuiFormControl'
   })(FormControl);
 
-  var styles$c = function styles(theme) {
+  var styles$e = function styles(theme) {
     return {
       /* Styles applied to the root element. */
       root: _extends({
@@ -11812,11 +12302,11 @@
      */
     variant: PropTypes__default.oneOf(['standard', 'outlined', 'filled'])
   } ;
-  var FormHelperText$1 = withStyles$1(styles$c, {
+  var FormHelperText$1 = withStyles$1(styles$e, {
     name: 'MuiFormHelperText'
   })(FormHelperText);
 
-  var styles$d = function styles(theme) {
+  var styles$f = function styles(theme) {
     return {
       /* Styles applied to the root element. */
       root: _extends({
@@ -11945,7 +12435,7 @@
      */
     required: PropTypes__default.bool
   } ;
-  var FormLabel$1 = withStyles$1(styles$d, {
+  var FormLabel$1 = withStyles$1(styles$f, {
     name: 'MuiFormLabel'
   })(FormLabel);
 
@@ -12026,7 +12516,7 @@
   // justifyContent: 'flex-start',
 
 
-  var styles$e = function styles(theme) {
+  var styles$g = function styles(theme) {
     return _extends({
       /* Styles applied to the root element */
       root: {},
@@ -12299,7 +12789,7 @@
      */
     zeroMinWidth: PropTypes__default.bool
   } ;
-  var StyledGrid = withStyles$1(styles$e, {
+  var StyledGrid = withStyles$1(styles$g, {
     name: 'MuiGrid'
   })(Grid);
 
@@ -12320,7 +12810,117 @@
     });
   }
 
-  var styles$f = function styles(theme) {
+  var styles$h = function styles(theme) {
+    return {
+      /* Styles applied to the root element. */
+      root: {
+        userSelect: 'none',
+        fontSize: theme.typography.pxToRem(24),
+        width: '1em',
+        height: '1em',
+        // Chrome fix for https://bugs.chromium.org/p/chromium/issues/detail?id=820541
+        // To remove at some point.
+        overflow: 'hidden',
+        flexShrink: 0
+      },
+
+      /* Styles applied to the root element if `color="primary"`. */
+      colorPrimary: {
+        color: theme.palette.primary.main
+      },
+
+      /* Styles applied to the root element if `color="secondary"`. */
+      colorSecondary: {
+        color: theme.palette.secondary.main
+      },
+
+      /* Styles applied to the root element if `color="action"`. */
+      colorAction: {
+        color: theme.palette.action.active
+      },
+
+      /* Styles applied to the root element if `color="error"`. */
+      colorError: {
+        color: theme.palette.error.main
+      },
+
+      /* Styles applied to the root element if `color="disabled"`. */
+      colorDisabled: {
+        color: theme.palette.action.disabled
+      },
+
+      /* Styles applied to the root element if `fontSize="inherit"`. */
+      fontSizeInherit: {
+        fontSize: 'inherit'
+      },
+
+      /* Styles applied to the root element if `fontSize="small"`. */
+      fontSizeSmall: {
+        fontSize: theme.typography.pxToRem(20)
+      },
+
+      /* Styles applied to the root element if `fontSize="large"`. */
+      fontSizeLarge: {
+        fontSize: theme.typography.pxToRem(36)
+      }
+    };
+  };
+  var Icon = React.forwardRef(function Icon(props, ref) {
+    var classes = props.classes,
+        className = props.className,
+        _props$color = props.color,
+        color = _props$color === void 0 ? 'inherit' : _props$color,
+        _props$component = props.component,
+        Component = _props$component === void 0 ? 'span' : _props$component,
+        _props$fontSize = props.fontSize,
+        fontSize = _props$fontSize === void 0 ? 'default' : _props$fontSize,
+        other = _objectWithoutProperties(props, ["classes", "className", "color", "component", "fontSize"]);
+
+    return /*#__PURE__*/React.createElement(Component, _extends({
+      className: clsx('material-icons', classes.root, className, color !== 'inherit' && classes["color".concat(capitalize(color))], fontSize !== 'default' && classes["fontSize".concat(capitalize(fontSize))]),
+      "aria-hidden": true,
+      ref: ref
+    }, other));
+  });
+   Icon.propTypes = {
+    /**
+     * The name of the icon font ligature.
+     */
+    children: PropTypes__default.node,
+
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: PropTypes__default.object.isRequired,
+
+    /**
+     * @ignore
+     */
+    className: PropTypes__default.string,
+
+    /**
+     * The color of the component. It supports those theme colors that make sense for this component.
+     */
+    color: PropTypes__default.oneOf(['inherit', 'primary', 'secondary', 'action', 'error', 'disabled']),
+
+    /**
+     * The component used for the root node.
+     * Either a string to use a DOM element or a component.
+     */
+    component: PropTypes__default.elementType,
+
+    /**
+     * The fontSize applied to the icon. Defaults to 24px, but can be configure to inherit font size.
+     */
+    fontSize: PropTypes__default.oneOf(['inherit', 'default', 'small', 'large'])
+  } ;
+  Icon.muiName = 'Icon';
+  var Icon$1 = withStyles$1(styles$h, {
+    name: 'MuiIcon'
+  })(Icon);
+
+  var styles$i = function styles(theme) {
     var light = theme.palette.type === 'light';
     var bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
     return {
@@ -12598,11 +13198,146 @@
     value: PropTypes__default.any
   } ;
   Input.muiName = 'Input';
-  var Input$1 = withStyles$1(styles$f, {
+  var Input$1 = withStyles$1(styles$i, {
     name: 'MuiInput'
   })(Input);
 
-  var styles$g = function styles(theme) {
+  var styles$j = {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'flex',
+      height: '0.01em',
+      // Fix IE 11 flexbox alignment. To remove at some point.
+      maxHeight: '2em',
+      alignItems: 'center',
+      whiteSpace: 'nowrap'
+    },
+
+    /* Styles applied to the root element if `variant="filled"`. */
+    filled: {
+      '&$positionStart:not($hiddenLabel)': {
+        marginTop: 16
+      }
+    },
+
+    /* Styles applied to the root element if `position="start"`. */
+    positionStart: {
+      marginRight: 8
+    },
+
+    /* Styles applied to the root element if `position="end"`. */
+    positionEnd: {
+      marginLeft: 8
+    },
+
+    /* Styles applied to the root element if `disablePointerEvents=true`. */
+    disablePointerEvents: {
+      pointerEvents: 'none'
+    },
+
+    /* Styles applied if the adornment is used inside <FormControl hiddenLabel />. */
+    hiddenLabel: {},
+
+    /* Styles applied if the adornment is used inside <FormControl margin="dense" />. */
+    marginDense: {}
+  };
+  var InputAdornment = React.forwardRef(function InputAdornment(props, ref) {
+    var children = props.children,
+        classes = props.classes,
+        className = props.className,
+        _props$component = props.component,
+        Component = _props$component === void 0 ? 'div' : _props$component,
+        _props$disablePointer = props.disablePointerEvents,
+        disablePointerEvents = _props$disablePointer === void 0 ? false : _props$disablePointer,
+        _props$disableTypogra = props.disableTypography,
+        disableTypography = _props$disableTypogra === void 0 ? false : _props$disableTypogra,
+        position = props.position,
+        variantProp = props.variant,
+        other = _objectWithoutProperties(props, ["children", "classes", "className", "component", "disablePointerEvents", "disableTypography", "position", "variant"]);
+
+    var muiFormControl = useFormControl() || {};
+    var variant = variantProp;
+
+    if (variantProp && muiFormControl.variant) {
+      {
+        if (variantProp === muiFormControl.variant) {
+          console.error('Material-UI: The `InputAdornment` variant infers the variant prop ' + 'you do not have to provide one.');
+        }
+      }
+    }
+
+    if (muiFormControl && !variant) {
+      variant = muiFormControl.variant;
+    }
+
+    return /*#__PURE__*/React.createElement(FormControlContext.Provider, {
+      value: null
+    }, /*#__PURE__*/React.createElement(Component, _extends({
+      className: clsx(classes.root, className, disablePointerEvents && classes.disablePointerEvents, muiFormControl.hiddenLabel && classes.hiddenLabel, variant === 'filled' && classes.filled, {
+        'start': classes.positionStart,
+        'end': classes.positionEnd
+      }[position], muiFormControl.margin === 'dense' && classes.marginDense),
+      ref: ref
+    }, other), typeof children === 'string' && !disableTypography ? /*#__PURE__*/React.createElement(Typography$1, {
+      color: "textSecondary"
+    }, children) : children));
+  });
+   InputAdornment.propTypes = {
+    /**
+     * The content of the component, normally an `IconButton` or string.
+     */
+    children: PropTypes__default.node.isRequired,
+
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: PropTypes__default.object.isRequired,
+
+    /**
+     * @ignore
+     */
+    className: PropTypes__default.string,
+
+    /**
+     * The component used for the root node.
+     * Either a string to use a DOM element or a component.
+     */
+    component: PropTypes__default.elementType,
+
+    /**
+     * Disable pointer events on the root.
+     * This allows for the content of the adornment to focus the input on click.
+     */
+    disablePointerEvents: PropTypes__default.bool,
+
+    /**
+     * If children is a string then disable wrapping in a Typography component.
+     */
+    disableTypography: PropTypes__default.bool,
+
+    /**
+     * @ignore
+     */
+    muiFormControl: PropTypes__default.object,
+
+    /**
+     * The position this adornment should appear relative to the `Input`.
+     */
+    position: PropTypes__default.oneOf(['start', 'end']),
+
+    /**
+     * The variant to use.
+     * Note: If you are using the `TextField` component or the `FormControl` component
+     * you do not have to set this manually.
+     */
+    variant: PropTypes__default.oneOf(['standard', 'outlined', 'filled'])
+  } ;
+  var InputAdornment$1 = withStyles$1(styles$j, {
+    name: 'MuiInputAdornment'
+  })(InputAdornment);
+
+  var styles$k = function styles(theme) {
     return {
       /* Styles applied to the root element. */
       root: {
@@ -12795,7 +13530,7 @@
      */
     variant: PropTypes__default.oneOf(['filled', 'outlined', 'standard'])
   } ;
-  var InputLabel$1 = withStyles$1(styles$g, {
+  var InputLabel$1 = withStyles$1(styles$k, {
     name: 'MuiInputLabel'
   })(InputLabel);
 
@@ -12809,7 +13544,7 @@
     ListContext.displayName = 'ListContext';
   }
 
-  var styles$h = {
+  var styles$l = {
     /* Styles applied to the root element. */
     root: {
       listStyle: 'none',
@@ -12897,7 +13632,7 @@
      */
     subheader: PropTypes__default.node
   } ;
-  var List$1 = withStyles$1(styles$h, {
+  var List$1 = withStyles$1(styles$l, {
     name: 'MuiList'
   })(List);
 
@@ -12951,7 +13686,7 @@
     return typeof anchorEl === 'function' ? anchorEl() : anchorEl;
   }
 
-  var styles$i = {
+  var styles$m = {
     /* Styles applied to the root element */
     root: {},
 
@@ -13432,7 +14167,7 @@
      */
     TransitionProps: PropTypes__default.object
   } ;
-  var Popover$1 = withStyles$1(styles$i, {
+  var Popover$1 = withStyles$1(styles$m, {
     name: 'MuiPopover'
   })(Popover);
 
@@ -13740,7 +14475,7 @@
     vertical: 'top',
     horizontal: 'left'
   };
-  var styles$j = {
+  var styles$n = {
     /* Styles applied to the `Paper` component. */
     paper: {
       // specZ: The maximum height of a simple menu should be one or more rows less than the view
@@ -13987,7 +14722,7 @@
      */
     variant: PropTypes__default.oneOf(['menu', 'selectedMenu'])
   } ;
-  var Menu$1 = withStyles$1(styles$j, {
+  var Menu$1 = withStyles$1(styles$n, {
     name: 'MuiMenu'
   })(Menu);
 
@@ -14085,7 +14820,7 @@
     d: "M7 10l5 5 5-5z"
   }), 'ArrowDropDown');
 
-  var styles$k = function styles(theme) {
+  var styles$o = function styles(theme) {
     return {
       /* Styles applied to the select component `root` class. */
       root: {},
@@ -14275,11 +15010,11 @@
     variant: PropTypes__default.oneOf(['filled', 'outlined', 'standard'])
   } ;
   NativeSelect.muiName = 'Select';
-  withStyles$1(styles$k, {
+  withStyles$1(styles$o, {
     name: 'MuiNativeSelect'
   })(NativeSelect);
 
-  var styles$l = function styles(theme) {
+  var styles$p = function styles(theme) {
     return {
       /* Styles applied to the root element. */
       root: {
@@ -14431,11 +15166,11 @@
      */
     style: PropTypes__default.object
   } ;
-  var NotchedOutline$1 = withStyles$1(styles$l, {
+  var NotchedOutline$1 = withStyles$1(styles$p, {
     name: 'PrivateNotchedOutline'
   })(NotchedOutline);
 
-  var styles$m = function styles(theme) {
+  var styles$q = function styles(theme) {
     var borderColor = theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
     return {
       /* Styles applied to the root element. */
@@ -14733,7 +15468,7 @@
     value: PropTypes__default.any
   } ;
   OutlinedInput.muiName = 'Input';
-  var OutlinedInput$1 = withStyles$1(styles$m, {
+  var OutlinedInput$1 = withStyles$1(styles$q, {
     name: 'MuiOutlinedInput'
   })(OutlinedInput);
 
@@ -15266,7 +16001,7 @@
     variant: PropTypes__default.oneOf(['standard', 'outlined', 'filled'])
   } ;
 
-  var styles$n = styles$k;
+  var styles$r = styles$o;
 
   var _ref = /*#__PURE__*/React.createElement(Input$1, null);
 
@@ -15505,7 +16240,7 @@
     variant: PropTypes__default.oneOf(['filled', 'outlined', 'standard'])
   } ;
   Select.muiName = 'Select';
-  var Select$1 = withStyles$1(styles$n, {
+  var Select$1 = withStyles$1(styles$r, {
     name: 'MuiSelect'
   })(Select);
 
@@ -15514,7 +16249,7 @@
     filled: FilledInput$1,
     outlined: OutlinedInput$1
   };
-  var styles$o = {
+  var styles$s = {
     /* Styles applied to the root element. */
     root: {}
   };
@@ -15861,7 +16596,7 @@
      */
     variant: PropTypes__default.oneOf(['filled', 'outlined', 'standard'])
   } ;
-  var TextField$1 = withStyles$1(styles$o, {
+  var TextField$1 = withStyles$1(styles$s, {
     name: 'MuiTextField'
   })(TextField);
 
@@ -15881,12 +16616,12 @@
     },
 
     cumulative: {
-      title: 'Cumulative New Cases',
+      title: 'Total Cases',
       f: (item) => max(0, item.confirmed + item.recovered + item.deaths)
     },
 
     daily: {
-      title: 'Daily New Cases',
+      title: 'Daily Cases',
       f: (item) =>
         (item.prev === null)
         ? item.cumulative
@@ -15899,10 +16634,10 @@
     },
 
     percentIncrease: {
-      title: 'Daily Percent Increase',
+      title: 'Daily Percent Change',
       f: (item) =>
         (item.prev && item.prev.cumulative > 0)
-        ? item.daily / item.prev.cumulative
+        ? 100 * item.daily / item.prev.cumulative
         : 0
     }
   };
@@ -15963,12 +16698,13 @@
 
   const loadCountrySeries = async function*(startingWith = '') {
     const countries = await getCountries();
+    const startingWithLower = startingWith.toLocaleLowerCase();
 
     for (const code in countries) {
       const {flag, title} = countries[code];
       const basicSeries = await getCountrySeries(code);
 
-      if (title.toLowerCase().startsWith(startingWith)) {
+      if (title.toLowerCase().startsWith(startingWithLower)) {
         const series = [];
         let i = 0;
 
@@ -15993,11 +16729,27 @@
     clearTimeout(handle);
   };
 
+  const round$2 = (n, value) => {
+    
+    const factor = 10 ** n;
+
+    return Math.round(factor * value) / factor;
+  };
+
   var Chart;
 
   var Chart$1 = Chart = class Chart extends React__default.Component {
     render() {
-      return e(Paper$1, [
+      var style;
+      style = {
+        padding: 5
+      };
+      return e(Paper$1, {
+        square: true,
+        elevation: 5,
+        style,
+        ...this.props
+      }, [
         e('h3',
         {
           style: {
@@ -16008,14 +16760,23 @@
         e(recharts.LineChart,
         {
           key: this.props.country.code,
-          width: 270,
-          height: 200,
+          width: this.props.width || 270,
+          height: this.props.height || 200,
           data: this.props.country.series.map((point,
         i,
         points) => {
+            var _,
+        d,
+        m,
+        y;
+            [_,
+        y,
+        m,
+        d] = /^(\d+)-(\d+)-(\d+)$/.exec(point.date);
             return {
-              name: point.date,
-              value: point[this.props.fn]
+              name: `${m}/${d}`,
+              value: round$2(2,
+        point[this.props.fn])
             };
           })
         },
@@ -16028,13 +16789,14 @@
           e(recharts.CartesianGrid,
           {
             strokeDasharray: '10 5',
-            stroke: "#faf"
+            stroke: '#faf'
           }),
           e(recharts.Line,
           {
             type: 'monotone',
             dataKey: 'value',
-            stroke: "#000"
+            stroke: '#00f',
+            name: functions[this.props.fn].title
           }),
           e(recharts.Tooltip)
         ])
@@ -16043,84 +16805,128 @@
 
   };
 
-  var App;
+  var ButtonBar;
 
-  var Results = App = class App extends React__default.Component {
+  var ButtonBar$1 = ButtonBar = class ButtonBar extends React__default.Component {
     constructor() {
       super();
       this.state = {
-        chunkSize: 3,
-        color: '#eee',
         selected: 'cumulative'
       };
     }
 
-    selectFunction(name) {
-      this.setState({
-        selected: name
-      });
+    select(selected) {
+      this.setState({selected});
+      if (this.props.onSelect) {
+        this.props.onSelect(selected);
+      }
       return 0;
     }
 
     render() {
-      return e(StyledGrid, {
-        container: true,
-        spacing: 3
-      }, [
-        e(StyledGrid,
+      var functionNames;
+      functionNames = Object.entries(functions).filter(([name, {title}]) => {
+        return !!title;
+      }).map(([name, {title}]) => {
+        return {name, title};
+      });
+      return e('div', [
+        ...functionNames.map(({name,
+        title}) => {
+          return e(Button$1,
         {
-          item: true,
-          lg: 12
-        },
-        [
-          ...Object.entries(functions).filter(([name,
-          {title}]) => {
-            return !!title;
-          }).map(([name,
-          {title}]) => {
-            return e(Button$1,
-          {
-              key: name,
-              style: {
-                margin: 5
-              },
-              onClick: () => {
-                return this.selectFunction(name);
-              }
+            key: name,
+            variant: 'outlined',
+            disabled: this.state.selected === name,
+            style: {
+              borderRadius: 0,
+              margin: 5,
+              marginLeft: 0
             },
-          [tn(title)]);
-          })
-        ]),
-        ...this.props.countries.map((country) => {
-          return e(StyledGrid,
-        {
-            item: true,
-            lg: 4,
-            key: country.code
+            onClick: () => {
+              return this.select(name);
+            }
           },
-        [
-            e(Chart$1,
-            {
-              fn: this.state.selected,
-              country: country
-            })
-          ]);
+        [tn(title)]);
         })
       ]);
     }
 
   };
 
-  var App$1;
+  var ChartModal;
 
-  var App$2 = App$1 = class App extends React__default.Component {
+  var ChartModal$1 = ChartModal = class ChartModal extends React__default.Component {
+    constructor() {
+      super();
+      this.state = {
+        selected: 'cumulative'
+      };
+    }
+
+    select(selected) {
+      return this.setState({selected});
+    }
+
+    render() {
+      var children, country, props;
+      ({country, children, ...props} = this.props);
+      return e(Modal, {
+        open: true
+      }, [
+        e(Paper$1,
+        [
+          e('h2',
+          [`Data for ${country.title}`]),
+          e(ButtonBar$1,
+          {
+            onSelect: (selected) => {
+              this.select(selected);
+              return 0;
+            }
+          }),
+          e(Chart$1,
+          {
+            country,
+            fn: this.state.selected
+          })
+        ])
+      ]);
+    }
+
+  };
+
+  var App;
+
+  var App$1 = App = class App extends React__default.Component {
     constructor() {
       super();
       this.timer = null;
       this.state = {
         lock: false,
-        results: []
+        results: [],
+        func: 'cumulative',
+        country: null // selected country in modal
       };
+    }
+
+    isModalOpen() {
+      return this.state.country !== null;
+    }
+
+    closeModal() {
+      this.setState({
+        country: null
+      });
+      return 0;
+    }
+
+    viewInModal(index) {
+      this.setState({
+        modal: true,
+        country: this.state.results[index]
+      });
+      return 0;
     }
 
     resetSearchTimer(term = '') {
@@ -16156,23 +16962,60 @@
       return countries;
     }
 
+    selectFunction(func) {
+      this.setState({func});
+      return 0;
+    }
+
     render() {
-      return e('#app', {
-        style: {
-          width: '80%',
-          margin: 'auto',
-          marginTop: 20
-        }
+      var style;
+      style = {
+        width: '80%',
+        margin: 'auto',
+        marginTop: 20,
+        padding: 10
+      };
+      return e(Paper$1, '#app', {
+        square: true,
+        elevation: 2,
+        style
       }, [
+        e('h1',
+        {
+          style: {
+            textAlign: 'center'
+          }
+        },
+        ["Covid Blows!"]),
+        e('hr'),
         e(TextField$1,
         {
+          placeholder: 'Search countries',
           disabled: this.state.lock,
+          inputProps: {
+            style: {
+              fontSize: `${32}pt`
+            }
+          },
+          InputProps: {
+            endAdornment: e(InputAdornment$1,
+        {
+              position: 'end'
+            },
+        [
+              this.state.lock ? e(CircularProgress$1,
+              {
+                color: 'primary',
+                margin: 5
+              }) : e(Icon$1,
+              {
+                fontSize: 'large'
+              },
+              ['search'])
+            ])
+          },
           style: {
-            width: `${100}%`,
-            height: 50,
-            outline: 'none',
-            fontSize: `${16}pt`,
-            border: 'none'
+            width: `${100}%`
           },
           onInput: (e) => {
             var value;
@@ -16180,10 +17023,56 @@
             return this.resetSearchTimer(value);
           }
         }),
-        e(Results,
+        e(StyledGrid,
         {
-          countries: this.state.results
-        })
+          container: true,
+          spacing: 3
+        },
+        [
+          e(StyledGrid,
+          {
+            item: true,
+            lg: 12
+          },
+          [
+            e(ButtonBar$1,
+            {
+              onSelect: (selected) => {
+                this.selectFunction(selected);
+                return 0;
+              }
+            })
+          ]),
+          ...this.state.results.map((country,
+          index) => {
+            return e(StyledGrid,
+          {
+              item: true,
+              xs: 6,
+              key: country.code,
+              style
+            },
+          [
+              e(Chart$1,
+              {
+                width: 420,
+                height: 250,
+                fn: this.state.func,
+                country: country
+              })
+            ]);
+          })
+        ]),
+        // onClick: () =>
+        //   @viewInModal(index)
+        this.isModalOpen() ? e(ChartModal$1,
+        {
+          country: this.state.country,
+          open: true,
+          onClose: () => {
+            return this.closeModal();
+          }
+        }) : void 0
       ]);
     }
 
@@ -16191,7 +17080,7 @@
 
   window.onload = () => {
 
-    ReactDOM__default.render(e(App$2), document.getElementById('app-mount'));
+    ReactDOM__default.render(e(App$1), document.getElementById('app-mount'));
   };
 
 }(ReactDOM, React, PropTypes, ReactIs, Recharts));

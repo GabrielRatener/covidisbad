@@ -15,12 +15,12 @@ export const functions = {
   },
 
   cumulative: {
-    title: 'Cumulative New Cases',
+    title: 'Total Cases',
     f: (item) => max(0, item.confirmed + item.recovered + item.deaths)
   },
 
   daily: {
-    title: 'Daily New Cases',
+    title: 'Daily Cases',
     f: (item) =>
       (item.prev === null)
       ? item.cumulative
@@ -33,10 +33,10 @@ export const functions = {
   },
 
   percentIncrease: {
-    title: 'Daily Percent Increase',
+    title: 'Daily Percent Change',
     f: (item) =>
       (item.prev && item.prev.cumulative > 0)
-      ? item.daily / item.prev.cumulative
+      ? 100 * item.daily / item.prev.cumulative
       : 0
   }
 }

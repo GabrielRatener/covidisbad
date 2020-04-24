@@ -5,3 +5,14 @@ export const clear = (handle) =>  {
   clearInterval(handle);
   clearTimeout(handle);
 }
+
+export const sigdig = (n, value) => {
+  // TDOO
+}
+
+export const round = (n, value) => {
+  
+  const factor = 10 ** n;
+
+  return Math.round(factor * value) / factor;
+}
