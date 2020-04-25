@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node start build",
     "dev": "node start build watch",
-    "start": "node start",
+    "start": "node --experimental-modules start",
     "postinstall": "npm start postinstall"
   },
   "devDependencies": {
