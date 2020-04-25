@@ -52,6 +52,10 @@ const loadData = async () => {
   fs.writeFileSync(`public/countries/index.json`, JSON.stringify(index, null, 2));
 }
 
+const serve = () => {
+  $`http-server`;
+}
+
 const copy = (production = false) => {
   const ns = production ? 'production.min' : 'development';
   const ext = production ? 'min.js' : 'js';
@@ -85,10 +89,6 @@ const rollup = (watch = false) => {
 const main = async (script, args = []) => {
   
   switch (script) {
-    case 'serve':
-      $`sirv public --dev`;
-      return;
-
     case 'build':
     case 'rollup':
       rollup(args.length > 0 && args[0] === 'watch');
@@ -105,6 +105,10 @@ const main = async (script, args = []) => {
 
     case 'postinstall':
       postinstall();
+      return;
+
+    case 'serve':
+      serve();
       return;
 
     default:

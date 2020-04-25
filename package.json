@@ -14,6 +14,7 @@
     "@rollup/plugin-node-resolve": "^7.0.0",
     "bootstrap": "^4.4.1",
     "coffeescript": "^2.5.1",
+    "http-server": "^0.12.1",
     "jeremy-json": "^1.0.2",
     "jolt.sh": "^1.0.2",
     "prop-types": "^15.7.2",
