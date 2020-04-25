@@ -10,6 +10,14 @@ const SERIES_URL = `${GITHUB_URL}/pomber/covid19/master/docs/timeseries.json`;
 
 const $ = jolt.createRunner();
 
+const makeDir = (dir) => {
+  try {
+    $`mkdir ${dir}`;
+  } catch (e) {
+    // it's ok...
+  }
+}
+
 const loadUrl = (url) => {
   const $ = jolt.createSpawnRunner();
 
@@ -35,6 +43,8 @@ const loadData = async () => {
 
   const index = {}
 
+  makeDir('public/countries');
+
   for await (const [title, series] of timeseries.iterate()) {
     if (countries.hasOwnProperty(title) && countries[title].code !== undefined) {
       const {code, flag} = countries[title];
@@ -59,6 +69,10 @@ const serve = () => {
 const copy = (production = false) => {
   const ns = production ? 'production.min' : 'development';
   const ext = production ? 'min.js' : 'js';
+
+  console.log('Creating public/dist directory...');
+
+  makeDir('public/dist');
 
   console.log('Copying dependencies...');
 
