@@ -69,8 +69,8 @@ export default class App extends React.Component
 
       e Search,
         onResults: (results) =>
-
           @setResults(results)
+          0
 
       e Grid, {container: yes, spacing: 3}, [
         e Grid, {item: yes, lg: 12}, [
