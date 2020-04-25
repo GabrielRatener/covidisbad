@@ -3,15 +3,9 @@ import React from "react"
 
 import {
   Paper
-  CircularProgress
-  Icon
-  TextField
-  InputAdornment
   Grid
 } from "@material-ui/core"
 
-import * as data from "../data"
-import {setTimeout, clear} from "../utils"
 import {e} from "../ui-tools"
 
 import Chart from "./chart.coffee"

@@ -43,23 +43,16 @@ export const functions = {
 
 export const augmentedItem = (item, index, series) => {
 
-  const proxy = new Proxy({}, {
-    get(_, string) {
-      if (item.hasOwnProperty(string)) {
-        return item[string];
-      }
+  const augmented = {...item};
 
-      if (functions.hasOwnProperty(string)) {
-        const {f} = functions[string];
-        const val = f(proxy, index, series);
+  Object.entries(functions)
+    .forEach(([key, {f}]) => {
+      Object.defineProperty(augmented, key, {
+        get() {
+          return f(augmented, index, series);
+        }
+      })
+    });
 
-        return val;
-      } else {
-
-        throw new Error(`Invalid function "${string}"`);
-      }
-    }
-  });
-
-  return proxy;
+  return augmented;
 }
