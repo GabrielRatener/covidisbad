@@ -113,7 +113,7 @@ const el = (target, id, attributes, children) => {
 
   const correctChildren =
     (children.length === 0) ?
-      null :
+      undefined :
     (children.length === 1) ?
       children[0] :
 
