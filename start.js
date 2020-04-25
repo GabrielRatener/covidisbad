@@ -62,8 +62,8 @@ const loadData = async () => {
   fs.writeFileSync(`public/countries/index.json`, JSON.stringify(index, null, 2));
 }
 
-const serve = () => {
-  $`http-server`;
+const serve = (port) => {
+  $`http-server -p ${port}`;
 }
 
 const copy = (production = false) => {
@@ -125,7 +125,7 @@ const main = async (script, args = []) => {
       return;
 
     case 'serve':
-      serve();
+      serve(args.length > 0 ? parseInt(args[0]) : 8080);
       return;
 
     default:
