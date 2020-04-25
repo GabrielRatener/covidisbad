@@ -86,9 +86,12 @@ const copy = (production = false) => {
   console.log('Done copying!');
 }
 
-const postinstall = () => {
+const postinstall = async () => {
   copy();
   rollup();
+  await loadData();
+
+  console.log("\nNow run `npm start` to start your local server!\n");
 }
 
 const rollup = (watch = false) => {
@@ -118,7 +121,7 @@ const main = async (script, args = []) => {
       return;
 
     case 'postinstall':
-      postinstall();
+      await postinstall();
       return;
 
     case 'serve':
