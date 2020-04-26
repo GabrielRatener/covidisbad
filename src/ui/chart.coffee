@@ -25,11 +25,6 @@ export default class Chart extends React.Component
       cursor: 'pointer'
     }
 
-    events =
-      onClick: () =>
-        if @props.onClick?
-          @props.onClick(@props.country)
-
     e Paper, {square: yes, elevation: 5, style, ...@props}, [
 
       e 'h3',
