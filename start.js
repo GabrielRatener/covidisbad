@@ -62,6 +62,10 @@ const loadData = async () => {
   fs.writeFileSync(`public/countries/index.json`, JSON.stringify(index, null, 2));
 }
 
+const serveSecure = (port) => {
+  $`http-server -p ${port} -S -C ssl/cert.pem -K ssl/key.pem`;
+}
+
 const serve = (port) => {
   $`http-server -p ${port}`;
 }
@@ -126,6 +130,10 @@ const main = async (script, args = []) => {
 
     case 'serve':
       serve(args.length > 0 ? parseInt(args[0]) : 8080);
+      return;
+
+    case 'serve:secure':
+      serveSecure(args.length > 0 ? parseInt(args[0]) : 443);
       return;
 
     default:

@@ -3,4 +3,7 @@
 /public/countries/
 /public/dist/
 
+/ssl/cert.pem
+/ssl/key.pem
+
 .DS_Store
