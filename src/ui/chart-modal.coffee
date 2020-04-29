@@ -1,5 +1,6 @@
 
 import React from "react"
+import PropTypes from "prop-types"
 
 import {Modal, Paper} from "@material-ui/core"
 
@@ -9,6 +10,9 @@ import Chart from "./chart.coffee"
 import ButtonBar from "./button-bar.coffee"
 
 export default class ChartModal extends React.Component
+
+  @propTypes =
+    country: PropTypes.object.isRequired
 
   constructor: () ->
     super()

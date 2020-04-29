@@ -1,5 +1,6 @@
 
 import React from "react"
+import PropTypes from "prop-types"
 
 import {
   TextField
@@ -23,6 +24,9 @@ loadCountries = (term) =>
   countries
 
 export default class Search extends React.Component
+
+  @propTypes =
+    onResults: PropTypes.func.isRequired
 
   constructor: ->
     super()

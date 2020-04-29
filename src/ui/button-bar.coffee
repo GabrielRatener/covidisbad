@@ -1,5 +1,6 @@
 
 import React from "react"
+import PropTypes from "prop-types"
 
 import {Chip} from "@material-ui/core"
 
@@ -13,6 +14,9 @@ functionNames =
 
 export default class ButtonBar extends React.Component
 
+  @propTypes =
+    onSelect: PropTypes.func.isRequired
+
   constructor: ->
     
     super()
@@ -23,8 +27,8 @@ export default class ButtonBar extends React.Component
 
     @setState {selected}
 
-    if @props.onSelect
-      @props.onSelect(selected)
+    @props.onSelect(selected)
+    
     0
 
   render: ->
